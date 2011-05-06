@@ -10,6 +10,9 @@ use vars '%ENV';
 $ENV{PATH} = '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/X11R6/bin';
 
 my $plugin = Nagios::Plugin::LVS->new( shortname => "LVS" );
-my $page   = $plugin->retrieve_page;
+
+my $page   = eval { $plugin->retrieve_page };
+if ($@){ $plugin->nagios_exit(Nagios::Plugin::UNKNOWN, $@); }
+
 my $stats  = $plugin->test_page($page);
 

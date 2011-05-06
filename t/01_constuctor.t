@@ -3,6 +3,8 @@ use strict;
 use warnings;
 
 use Nagios::Plugin::LVS;
+
+@ARGV = ('--service', 'stub');
 my $np = Nagios::Plugin::LVS->new( shortname => "my plugin");
 
 isa_ok $np, 'Nagios::Plugin::LVS';
